@@ -25,7 +25,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotNull
     @Size(min = 9, max = 9)
     @Column(nullable = false, unique = true)
