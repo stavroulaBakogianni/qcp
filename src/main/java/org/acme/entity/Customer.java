@@ -1,4 +1,4 @@
-package org.acme.model;
+package org.acme.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
