@@ -1,18 +1,15 @@
 package org.acme.rest.client;
 
-import java.util.Set;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import org.acme.dto.CustomerDTO;
+import javax.ws.rs.PathParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/{countryCode}")
+@Path("/checkVat")
 @RegisterRestClient
 public interface ValidateService {
 
-	@GET
-	@Path("/{vat}")
-	Boolean checkVat(@QueryParam("vat") String vat);
-
+    @GET
+    @Path("/{countryCode}/{vatNumber}")
+    ValidateVatResponse checkVat(@PathParam("countryCode") String countryCode, @PathParam("vatNumber") String vatNumber);
 }
