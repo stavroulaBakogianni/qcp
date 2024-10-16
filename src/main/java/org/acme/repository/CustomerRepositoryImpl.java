@@ -1,6 +1,5 @@
 package org.acme.repository;
 
-import static java.lang.StrictMath.log;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
@@ -8,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import lombok.NoArgsConstructor;
 import org.acme.entity.Customer;
 import org.acme.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
