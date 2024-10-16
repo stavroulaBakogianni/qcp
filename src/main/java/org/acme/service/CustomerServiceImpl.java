@@ -3,6 +3,7 @@ package org.acme.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.acme.dto.CustomerDTO;
 import org.acme.entity.Customer;
@@ -10,6 +11,7 @@ import org.acme.exception.ResourceNotFoundException;
 import org.acme.mapper.CustomerMapper;
 import org.acme.repository.CustomerRepositoryImpl;
 
+@ApplicationScoped 
 public class CustomerServiceImpl implements CustomerService{
     @Inject
     private CustomerRepositoryImpl customerRepo;
