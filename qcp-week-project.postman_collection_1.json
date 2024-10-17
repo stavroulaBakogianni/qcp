@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "de6939ff-ac96-4ea3-9122-df6e07148c2d",
+		"name": "qcp-week-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38919542"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"vat\": \"876541941\",\n  \"firstName\": \"Stavroula\",\n  \"lastName\": \"B\",\n  \"email\": \"stavroula.b@example.com\",\n  \"mobilePhone\": \"6794237532\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/api/customers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "365"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "origin, content-type, accept, authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, DELETE, OPTIONS, HEAD"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"vat\": \"987654321\",\n        \"firstName\": \"JMarios\",\n        \"lastName\": \"Sir\",\n        \"email\": \"marios.sir@example.com\",\n        \"mobilePhone\": \"1234567890\"\n    },\n    {\n        \"vat\": \"123876549\",\n        \"firstName\": \"Maria\",\n        \"lastName\": \"Papadopoulou\",\n        \"email\": \"maria.pap@example.com\",\n        \"mobilePhone\": \"7654567890\"\n    },\n    {\n        \"vat\": \"876543291\",\n        \"firstName\": \"VAsilis\",\n        \"lastName\": \"Pap\",\n        \"email\": \"vasilis.pap@example.com\",\n        \"mobilePhone\": \"7654567823\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/123456789",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"123456789"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
