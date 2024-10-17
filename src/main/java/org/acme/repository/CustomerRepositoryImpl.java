@@ -1,5 +1,6 @@
 package org.acme.repository;
 
+import static io.quarkus.arc.ComponentsProvider.LOG;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
@@ -9,11 +10,8 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import org.acme.entity.Customer;
 import org.acme.exception.ResourceNotFoundException;
-import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped
-//@NoArgsConstructor
-@Slf4j
 public class CustomerRepositoryImpl implements Repository<Customer, Long> {
 
     @Inject
@@ -24,8 +22,10 @@ public class CustomerRepositoryImpl implements Repository<Customer, Long> {
     public Optional<Customer> save(Customer customer) {
         try {
             entityManager.persist(customer);
+            LOG.info("Customer saved successfully");
             return Optional.of(customer);
         } catch (ResourceNotFoundException e) {
+            LOG.error("Error saving customer: {}" + e.getMessage());
             return Optional.empty();
         }
     }
@@ -35,13 +35,17 @@ public class CustomerRepositoryImpl implements Repository<Customer, Long> {
         try {
             TypedQuery<Customer> query = entityManager.createQuery("FROM Customer WHERE vat = :vat", Customer.class);
             query.setParameter("vat", vat);
-            return query.getResultStream().findFirst();
-        } catch (ResourceNotFoundException e) {
-            System.out.println("error");
-            //log.error(e.getMessage());
+            Optional<Customer> customer = query.getResultStream().findFirst();
+            if (customer.isPresent()) {
+                LOG.info("Customer retrieved successfully with VAT:" + vat);
+            } else {
+                LOG.warn("No customer found with VAT:" + vat);
+            }
+            return customer;
+        } catch (Exception e) {
+            LOG.error("Error retrieving customer with VAT:" + vat + e.getMessage());
             return Optional.empty();
         }
-
     }
 
     @Transactional
@@ -49,12 +53,13 @@ public class CustomerRepositoryImpl implements Repository<Customer, Long> {
     public List<Customer> getAll() {
         try {
             TypedQuery<Customer> query = entityManager.createQuery("SELECT c FROM Customer c", Customer.class);
-            return query.getResultList();
-        } catch (ResourceNotFoundException e) {
-            //Logger.getLogger("Error retrieving data");
-            System.out.println("error");
+            List<Customer> customers = query.getResultList();
+            LOG.info("Retrieved {} customers from the database" + customers.size());
+            return customers;
+        } catch (Exception e) {
+            LOG.error("Error retrieving customers:" + e.getMessage());
+            return List.of();
         }
-        return List.of();
     }
 
 }
