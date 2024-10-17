@@ -45,12 +45,19 @@ public class CustomerResource {
     @Path("/{vat}")
     @GET
     public Response getCustomerByVat(@PathParam("vat") String vat) {
-        Optional<CustomerDTO> customer = customerServiceImpl.findByVat(vat);
-        if (customer.isPresent()) {
-            return Response.ok(customer.get()).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Customer with VAT " + vat + " not found.")
+        try {
+            Optional<CustomerDTO> customer = customerServiceImpl.findByVat(vat);
+            if (customer.isPresent()) {
+                return Response.ok(customer.get()).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Customer with VAT " + vat + " not found.")
+                        .build();
+            }
+        } catch (Exception e) {
+            logger.error("Error while fetching customer by VAT: {}", e.getMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("An error occurred while fetching the customer.")
                     .build();
         }
     }
@@ -67,8 +74,8 @@ public class CustomerResource {
         try {
             ValidateVatResponse vatResponse = validateService.checkVat("EL", customerDTO.getVat());
             
-            System.out.println("ok"+vatResponse);
-            
+            System.out.println("VAT validation response: " + vatResponse);
+
             if (customerServiceImpl.findByVat(customerDTO.getVat()).isPresent()) {
                 return Response.status(Response.Status.CONFLICT)
                         .entity("Customer with this VAT already exists.")
