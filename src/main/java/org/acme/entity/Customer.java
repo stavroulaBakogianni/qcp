@@ -10,13 +10,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "customers")
-@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,4 +49,27 @@ public class Customer {
     @Column(name = "mobile_phone", length = 20)
     private String mobilePhone;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getVat() {
+        return vat;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
 }
